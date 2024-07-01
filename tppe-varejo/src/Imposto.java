@@ -8,5 +8,13 @@ public class Imposto {
         }
     }
 
+    public static double ImpMunicipal(String regiao, double valorCompra){
+        if(regiao == "DF"){
+            return valorCompra;
+        }else{
+            return valorCompra * 0.04;
+        }
+    }
+
 
 }

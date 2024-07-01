@@ -27,5 +27,22 @@ public class ImpostoTest {
 
     }
 
+    @Test
+    public void testImpMunicipalDentroDF(){
+        String regiao = "DF";
+        double valorCompra = 100;
+        double obtido = Imposto.ImpMunicipal(regiao,valorCompra);
+        assertEquals((valorCompra) , obtido, .1);
+
+    }
+
+    @Test
+    public void testImpMunicipalForaDF(){
+        String regiao = "NORDESTE";
+        double valorCompra = 100;
+        double obtido = Imposto.ImpMunicipal(regiao,valorCompra);
+        assertEquals((valorCompra * 0.04) , obtido, .1);
+
+    }
 
 }
