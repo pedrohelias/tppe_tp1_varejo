@@ -28,8 +28,31 @@ public class Produto {
         }
     }
 
-    public static Boolean verificaDescricao(String descricaoProduto){
-        return null;
+    public static Boolean verificaDescricao(String descricaoProduto){ //produto deve ter até 20 caracteres
+        int tamanho = descricaoProduto.length();
+        if(tamanho <= 20){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public static Boolean verificaValorVenda(double valorVenda){ //valor de venda não pode ser 0 ou menor
+        if(valorVenda <= 0){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    public static Boolean verificaUnMedida(String unidadeMedida){ //naõ pode passar de 3 caracteres
+        int tamanho = unidadeMedida.length();
+        if(tamanho > 0 && tamanho <= 3){
+            return true;
+        }else{
+            return false;
+        }
+        
     }
 
 }

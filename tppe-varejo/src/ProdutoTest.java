@@ -12,4 +12,30 @@ public class ProdutoTest {
        assertEquals(esperado, verificaCodigo);
 
     }
+
+    @Test
+    public void tamanhoDescricao(){ 
+       String produto = "descrição teste tdd"; //precisa ser menor que 20 caracteres
+       Boolean esperado = true;
+       Boolean verificaDescricao = Produto.verificaDescricao(produto);
+       assertEquals(esperado, verificaDescricao);
+
+    }
+
+    @Test
+    public void testaValorVenda(){ 
+       double produto = 100; //precisa ser menor que 20 caracteres
+       Boolean esperado = true;
+       Boolean verificaDescricao = Produto.verificaValorVenda(produto);
+       assertEquals(esperado, verificaDescricao);
+
+    }
+
+    @Test
+    public void testaUnidadeMedida(){
+       String unidadeMedida = "cm"; //precisa ser menor que 20 caracteres
+       Boolean esperado = true;
+       Boolean verificaDescricao = Produto.verificaUnMedida(unidadeMedida);
+       assertEquals(esperado, verificaDescricao);
+    }
 }
