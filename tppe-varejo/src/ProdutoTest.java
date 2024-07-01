@@ -23,8 +23,26 @@ public class ProdutoTest {
     }
 
     @Test
+    public void tamanhoDescricaoMinima(){ 
+       String produto = "a"; //precisa ser menor que 20 caracteres
+       Boolean esperado = true;
+       Boolean verificaDescricao = Produto.verificaDescricao(produto);
+       assertEquals(esperado, verificaDescricao);
+
+    }
+
+    @Test
+    public void tamanhoDescricaoMaximo(){ 
+       String produto = "descrição teste tdd1"; //precisa ser menor que 20 caracteres
+       Boolean esperado = true;
+       Boolean verificaDescricao = Produto.verificaDescricao(produto);
+       assertEquals(esperado, verificaDescricao);
+
+    }
+
+    @Test
     public void testaValorVenda(){ 
-       double produto = 100; //precisa ser menor que 20 caracteres
+       double produto = 100; //precisa ser maior que 0
        Boolean esperado = true;
        Boolean verificaDescricao = Produto.verificaValorVenda(produto);
        assertEquals(esperado, verificaDescricao);
@@ -32,8 +50,34 @@ public class ProdutoTest {
     }
 
     @Test
+    public void testaValorVendaMinimo(){ 
+       double produto = 0.01; //precisa ser maior que 0
+       Boolean esperado = true;
+       Boolean verificaDescricao = Produto.verificaValorVenda(produto);
+       assertEquals(esperado, verificaDescricao);
+
+    }
+
+
+    @Test
     public void testaUnidadeMedida(){
-       String unidadeMedida = "cm"; //precisa ser menor que 20 caracteres
+       String unidadeMedida = "cm"; 
+       Boolean esperado = true;
+       Boolean verificaDescricao = Produto.verificaUnMedida(unidadeMedida);
+       assertEquals(esperado, verificaDescricao);
+    }
+
+    @Test
+    public void testaUnidadeMedidaMinimo(){
+       String unidadeMedida = "c"; 
+       Boolean esperado = true;
+       Boolean verificaDescricao = Produto.verificaUnMedida(unidadeMedida);
+       assertEquals(esperado, verificaDescricao);
+    }
+
+    @Test
+    public void testaUnidadeMedidaMaximo(){
+       String unidadeMedida = "cm3"; 
        Boolean esperado = true;
        Boolean verificaDescricao = Produto.verificaUnMedida(unidadeMedida);
        assertEquals(esperado, verificaDescricao);
