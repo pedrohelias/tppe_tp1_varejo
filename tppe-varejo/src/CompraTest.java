@@ -43,27 +43,27 @@ public class CompraTest {
     @Test
     public void testElegivelCashback() {
         compra = new Compra(data, cliente, produtoVendido, metodoPagamento, freteProduto, impostoGeral);
-        assertEquals(compra.proverCashback(compra, compra.cliente.tipoCliente),PRIME);
+        assertEquals(compra.proverCashback(compra),valorEsperado);
     }
 
     @Test
     public void testCalculoFreteClienteEspecial(){
         compra = new Compra(data, cliente, produtoVendido, metodoPagamento, freteProduto, impostoGeral);
-        Double valorComprado = compra.valorFreteEspecial(compra.produtoVendido, cliente);
-        assertEquals(Double.of(valorComprado),valorEsperado);
+        double valorComprado = compra.valorFreteProduto(compra.produtoVendido, cliente);
+        assertEquals(valorComprado,valorEsperado);
     }
 
     @Test
     public void testCalculoFreteClientePrime(){
         compra = new Compra(data, cliente, produtoVendido, metodoPagamento, freteProduto, impostoGeral);
-        Double valorComprado = compra.valorFreteEspecial(compra.produtoVendido, cliente);
+        Double valorComprado = compra.valorFreteProduto(compra.produtoVendido, cliente);
         assertEquals(Double.of(valorComprado),valorEsperado);
     }
 
     @Test
     public void testCalculoElegibilidadeClienteEspecial(){
         compra = new Compra(data, cliente, produtoVendido, metodoPagamento, freteProduto, impostoGeral);
-        assertEquals( compra.clienteElegivelParaEspecial(compra.cliente.numeroCpf, compra), valorEsperado);
+        assertEquals( compra.clienteElegivelParaEspecial(compra.cliente.numeroCpf, compra, compra.data.getMonth()), valorEsperado);
     }
 
 }
