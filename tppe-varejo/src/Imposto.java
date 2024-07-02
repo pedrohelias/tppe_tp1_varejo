@@ -2,6 +2,8 @@ public class Imposto {
 
     public String regiao;
     public double valorCompra;
+    public double impostoMun;
+    public double impostoIcms;
     
     public Imposto(String regiao, double valorCompra) {
         //TODO Auto-generated constructor stub
@@ -10,20 +12,50 @@ public class Imposto {
     }
 
     public double ICMS(String regiao, double valorCompra){
+        double calculo;
         if(regiao == "DF"){
-            return valorCompra * 0.18;
+            calculo = valorCompra * 0.18;
+            setImpostoIcms(calculo);
+            return impostoIcms;
         }else{
-            return valorCompra * 0.12; 
+            calculo = valorCompra * 0.12;
+            setImpostoIcms(calculo);
+            return impostoIcms; 
         }
     }
 
-    public static double ImpMunicipal(String regiao, double valorCompra){
+    public double ImpMunicipal(String regiao, double valorCompra){
+        double calculo;
+
         if(regiao == "DF"){
-            return valorCompra;
+            setImpostoMun(valorCompra);
+            return impostoMun;
         }else{
-            return valorCompra * 0.04;
+            calculo = valorCompra * 0.04;
+            setImpostoMun(calculo);
+            return impostoMun; 
         }
     }
 
+    public double valorTotalImpostos(){
+        double total = getImpostoIcms() + getImpostoMun();
+        return total;
+    }
+
+    double getImpostoMun(){
+        return impostoMun;
+    }
+
+    void setImpostoMun(double impostoMun){
+        this.impostoMun = impostoMun;
+    }
+
+    double getImpostoIcms(){
+        return impostoIcms;
+    }
+
+    void setImpostoIcms(double impostoIcms){
+        this.impostoIcms = impostoIcms;
+    }
 
 }
