@@ -25,7 +25,7 @@ public class Cliente {
     private final Tipo tipo;
     private final double cashback;
     private final double mensalidade;
-    private final ArrayList<Cartao> cartoes;
+    protected final ArrayList<Cartao> cartoes;
 
     // Construtor
     public Cliente(String nome, String cpf, Regiao endereco, boolean capital, Tipo tipo, double cashback, double mensalidade) {

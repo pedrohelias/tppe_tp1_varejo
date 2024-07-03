@@ -11,10 +11,6 @@ public class Imposto {
         this.valorCompra = valorCompra;
     }
 
-
-    
-
-
     public double ICMS(String regiao, double valorCompra){
         double calculo;
         if(regiao == "Distrito_Federal"){
