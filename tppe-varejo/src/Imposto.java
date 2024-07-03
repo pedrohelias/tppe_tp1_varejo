@@ -11,9 +11,13 @@ public class Imposto {
         this.valorCompra = valorCompra;
     }
 
+
+    
+
+
     public double ICMS(String regiao, double valorCompra){
         double calculo;
-        if(regiao == "DF"){
+        if(regiao == "Distrito_Federal"){
             calculo = valorCompra * 0.18;
             setImpostoIcms(calculo);
             return impostoIcms;
@@ -27,7 +31,7 @@ public class Imposto {
     public double ImpMunicipal(String regiao, double valorCompra){
         double calculo;
 
-        if(regiao == "DF"){
+        if(regiao == "Distrito_Federal"){
             setImpostoMun(valorCompra);
             return impostoMun;
         }else{

@@ -22,8 +22,8 @@ public class ImpostoTest {
     @Parameters
     public static Collection<Object[]> getParameters(){
         return Arrays.asList(new Object[][] {
-                {"DF", 100, 18}, //dentro do DF
-                {"SUL", 100, 12} //fora do DF
+                {"Distrito_Federal", 100, 18}, //dentro do DF
+                {"Sul", 100, 12} //fora do DF
         });
     }
 

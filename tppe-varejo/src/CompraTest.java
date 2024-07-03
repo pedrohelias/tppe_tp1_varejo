@@ -12,7 +12,7 @@ public class CompraTest {
     protected Date data;
     protected Cliente cliente;
     protected ArrayList<Produto> produtoVendido;
-    protected String metodoPagamento
+    protected String metodoPagamento;
     protected Frete freteProduto;
     protected Imposto impostoGeral;
     protected double valorEsperado;
