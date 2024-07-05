@@ -1,8 +1,6 @@
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class Compra {
 
@@ -10,11 +8,11 @@ public class Compra {
 
     protected String data;
     protected Cliente cliente;
-    protected ArrayList<Produto> produtoVendido;
+    protected List<Produto> produtoVendido;
     protected String metodoPagamento;
     protected Imposto impostoGeral;
 
-    public Compra(String data, Cliente cliente, ArrayList<Produto> produtoVendido, String metodoPagamento, Imposto impostoGeral) {
+    public Compra(String data, Cliente cliente, List<Produto> produtoVendido, String metodoPagamento, Imposto impostoGeral) {
         this.data = data;
         this.cliente = cliente;
         this.produtoVendido = produtoVendido;
@@ -22,25 +20,28 @@ public class Compra {
         this.impostoGeral = impostoGeral;
     }
 
-    public static double proverCashback(Compra compra, String numeroCartao){
+    public static double proverCashback(String metodoPagamento, List<Produto> produtoVendido, String numeroCartao, Cliente.Tipo tipo){
         String numeroCartaoEmpresa = "429613";
         String cartaoReduzido = numeroCartao.substring(0,6);
         double valorCashback = 0d;
 
-        if(Objects.equals(compra.metodoPagamento, "DINHEIRO")){
+        if (Objects.equals(tipo,Cliente.Tipo.PRIME)) {
+            if (Objects.equals(metodoPagamento, "DINHEIRO") || Objects.equals(metodoPagamento, "CARTAO") && !cartaoReduzido.equals(numeroCartaoEmpresa)) {
 
-            double x = 0d;
-            for (int i = 0; i < compra.produtoVendido.size(); i++) {
-                x += compra.produtoVendido.get(i).valorVenda;
-            }
-            valorCashback = x * 0.03;
+                double x = 0d;
+                for (Produto produto : produtoVendido) {
+                    x += produto.valorVenda;
+                }
 
-        } else if (Objects.equals(compra.metodoPagamento, "CARTAO") && cartaoReduzido.equals(numeroCartaoEmpresa)) {
-            double x = 0d;
-            for (int i = 0; i < compra.produtoVendido.size(); i++) {
-                x += compra.produtoVendido.get(i).valorVenda;
+                valorCashback = x * 0.03;
+
+            } else if (Objects.equals(metodoPagamento, "CARTAO") && cartaoReduzido.equals(numeroCartaoEmpresa)) {
+                double x = 0d;
+                for (int i = 0; i < produtoVendido.size(); i++) {
+                    x += produtoVendido.get(i).getValorVenda();
+                }
+                valorCashback = x * 0.05;
             }
-            valorCashback = x * 0.05;
         }
         return valorCashback;
     }
@@ -74,7 +75,6 @@ public class Compra {
 
         return valorTotal;
     }
-
     
     public static double valorFrete(Cliente.Regiao regiao, boolean localidade){
         double valorFreteEsperado = 0d;
