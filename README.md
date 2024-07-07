@@ -8,7 +8,7 @@ Recomendamos esse para que a visualização dos testes assim como o código seja
 
 Grupo
 
-Artur Vinicius Dias Nunes - 190142421
-Gabriel Ferreira da Silva - 200018060
-Mateus de Almeida Dias - 190142260
-Pedro Helias Carlos - 140158278
+Artur Vinicius Dias Nunes - 190142421<br>
+Gabriel Ferreira da Silva - 200018060<br>
+Mateus de Almeida Dias - 190142260<br>
+Pedro Helias Carlos - 140158278<br>
