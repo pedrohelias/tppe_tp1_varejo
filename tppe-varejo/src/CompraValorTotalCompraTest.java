@@ -5,7 +5,7 @@ import org.junit.runners.Parameterized;
 import java.util.*;
 
 @RunWith(Parameterized.class)
-public class CompraCashbackTest {
+public class CompraValorTotalCompraTest {
 
     public Compra compra;
     protected String data;
@@ -29,22 +29,22 @@ public class CompraCashbackTest {
         Cartao cartaoUsuario2 = new Cartao("4296132233334444", "Titular Teste", "12/24", "123.456.789-00");
 
 
-        return Arrays.asList(new Object[][] {
+        return Arrays.asList(new Object[][]{
                 {
-                    "14/10/2024 15:33:00",
-                    new Cliente("Caio Cardoso",
-                            "567.541.880-65",
-                            Cliente.Regiao.Sudeste,
-                            true,
-                            Cliente.Tipo.PRIME,
-                            0.0,
-                            0.0
-                    ),
-                    cartaoUsuario1,
-                    produtos,
-                    "CARTAO",
-                    new Imposto("Distrito_Federal", 100),
-                    7.84
+                        "14/10/2024 15:33:00",
+                        new Cliente("Caio Cardoso",
+                                "567.541.880-65",
+                                Cliente.Regiao.Sudeste,
+                                true,
+                                Cliente.Tipo.PRIME,
+                                0.0,
+                                0.0
+                        ),
+                        cartaoUsuario1,
+                        produtos,
+                        "CARTAO",
+                        new Imposto("Distrito_Federal", 100),
+                        262.39d
                 },
                 {
                         "14/10/2024 15:33:00",
@@ -52,7 +52,7 @@ public class CompraCashbackTest {
                                 "478.385.280-46",
                                 Cliente.Regiao.Centro_Oeste,
                                 true,
-                                Cliente.Tipo.PRIME,
+                                Cliente.Tipo.ESPECIAL,
                                 0.0,
                                 0.0
                         ),
@@ -60,23 +60,23 @@ public class CompraCashbackTest {
                         produtos,
                         "CARTAO",
                         new Imposto("Distrito_Federal", 100),
-                        13.06
+                        218.83d
                 },
                 {
                         "14/10/2024 15:33:00",
                         new Cliente("João da Cunha",
                                 "039.992.690-90",
                                 Cliente.Regiao.Norte,
-                                true,
-                                Cliente.Tipo.PRIME,
+                                false,
+                                Cliente.Tipo.ESPECIAL,
                                 0.0,
                                 0.0
                         ),
-                        cartaoUsuario2,
+                        cartaoUsuario1,
                         produtos,
                         "DINHEIRO",
                         new Imposto("Distrito_Federal", 100),
-                        7.84
+                        251.90d
                 },
                 {
                         "14/10/2024 15:33:00",
@@ -84,7 +84,7 @@ public class CompraCashbackTest {
                                 "505.314.460-50",
                                 Cliente.Regiao.Nordeste,
                                 true,
-                                Cliente.Tipo.ESPECIAL,
+                                Cliente.Tipo.PADRAO,
                                 0.0,
                                 0.0
                         ),
@@ -92,25 +92,25 @@ public class CompraCashbackTest {
                         produtos,
                         "DINHEIRO",
                         new Imposto("Distrito_Federal", 100),
-                        0
+                        277.39d
                 }
         });
     }
 
-   public CompraCashbackTest(String data, Cliente cliente, Cartao cartao, List<Produto> produtoVendido, String metodoPagamento, Imposto impostoGeral, double valorEsperado) {
-       this.data = data;
-       this.cliente = cliente;
-       this.cartao = cartao;
-       this.produtoVendido = produtoVendido;
-       this.metodoPagamento = metodoPagamento;
-       this.impostoGeral = impostoGeral;
-       this.valorEsperado = valorEsperado;
-   }
+    public CompraValorTotalCompraTest(String data, Cliente cliente, Cartao cartao, List<Produto> produtoVendido, String metodoPagamento, Imposto impostoGeral, double valorEsperado) {
+        this.data = data;
+        this.cliente = cliente;
+        this.cartao = cartao;
+        this.produtoVendido = produtoVendido;
+        this.metodoPagamento = metodoPagamento;
+        this.impostoGeral = impostoGeral;
+        this.valorEsperado = valorEsperado;
+    }
 
     @Test
-    public void testElegivelCashback() {
-        compra = new Compra(data, cliente,produtoVendido,metodoPagamento,impostoGeral);
-        assertEquals(Compra.proverCashback(compra.metodoPagamento, compra.produtoVendido,cartao.getNumero(), compra.cliente.getTipo()),valorEsperado, 0.2);
+    public void testCalculoDoValorDaCompraTotal(){
+        compra = new Compra(data, cliente, produtoVendido, metodoPagamento, impostoGeral);
+        assertEquals( Compra.valorTotalCompra(compra.produtoVendido, compra.cliente, compra.metodoPagamento, cartao.getNumero()), valorEsperado,0.1);
     }
 
 }

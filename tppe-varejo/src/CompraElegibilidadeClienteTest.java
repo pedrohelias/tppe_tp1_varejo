@@ -5,7 +5,7 @@ import org.junit.runners.Parameterized;
 import java.util.*;
 
 @RunWith(Parameterized.class)
-public class CompraCashbackTest {
+public class CompraElegibilidadeClienteTest {
 
     public Compra compra;
     protected String data;
@@ -31,20 +31,20 @@ public class CompraCashbackTest {
 
         return Arrays.asList(new Object[][] {
                 {
-                    "14/10/2024 15:33:00",
-                    new Cliente("Caio Cardoso",
-                            "567.541.880-65",
-                            Cliente.Regiao.Sudeste,
-                            true,
-                            Cliente.Tipo.PRIME,
-                            0.0,
-                            0.0
-                    ),
-                    cartaoUsuario1,
-                    produtos,
-                    "CARTAO",
-                    new Imposto("Distrito_Federal", 100),
-                    7.84
+                        "14/10/2024 15:33:00",
+                        new Cliente("Caio Cardoso",
+                                "567.541.880-65",
+                                Cliente.Regiao.Sudeste,
+                                true,
+                                Cliente.Tipo.PRIME,
+                                0.0,
+                                0.0
+                        ),
+                        cartaoUsuario1,
+                        produtos,
+                        "CARTAO",
+                        new Imposto("Distrito_Federal", 100),
+                        7.84
                 },
                 {
                         "14/10/2024 15:33:00",
@@ -97,20 +97,21 @@ public class CompraCashbackTest {
         });
     }
 
-   public CompraCashbackTest(String data, Cliente cliente, Cartao cartao, List<Produto> produtoVendido, String metodoPagamento, Imposto impostoGeral, double valorEsperado) {
-       this.data = data;
-       this.cliente = cliente;
-       this.cartao = cartao;
-       this.produtoVendido = produtoVendido;
-       this.metodoPagamento = metodoPagamento;
-       this.impostoGeral = impostoGeral;
-       this.valorEsperado = valorEsperado;
-   }
-
-    @Test
-    public void testElegivelCashback() {
-        compra = new Compra(data, cliente,produtoVendido,metodoPagamento,impostoGeral);
-        assertEquals(Compra.proverCashback(compra.metodoPagamento, compra.produtoVendido,cartao.getNumero(), compra.cliente.getTipo()),valorEsperado, 0.2);
+    public CompraElegibilidadeClienteTest(String data, Cliente cliente, Cartao cartao, List<Produto> produtoVendido, String metodoPagamento, Imposto impostoGeral, double valorEsperado) {
+        this.data = data;
+        this.cliente = cliente;
+        this.cartao = cartao;
+        this.produtoVendido = produtoVendido;
+        this.metodoPagamento = metodoPagamento;
+        this.impostoGeral = impostoGeral;
+        this.valorEsperado = valorEsperado;
     }
+    //    TODO Criar teste parametrizado para Elegibilidade de Cliente para se tornar Especial
+//    @Test
+//    public void testCalculoElegibilidadeClienteEspecial(){
+//        compra = new Compra(data, cliente, produtoVendido, metodoPagamento, freteProduto, impostoGeral);
+//        assertEquals( compra.clienteElegivelParaEspecial(compra.cliente.getCpf(), compra, compra.data.getMonth()), valorEsperado);
+//    }
+
 
 }

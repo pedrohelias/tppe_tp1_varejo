@@ -4,8 +4,6 @@ import java.util.Objects;
 
 public class Compra {
 
-    // TODO Adicionar Métodos
-
     protected String data;
     protected Cliente cliente;
     protected List<Produto> produtoVendido;
@@ -46,7 +44,7 @@ public class Compra {
         return valorCashback;
     }
 
-    public static  double valorTotalCompra(ArrayList<Produto> produto, Cliente clienteComprador, String metodoPagamento, String numeroCartao){
+    public static  double valorTotalCompra(List<Produto> produto, Cliente clienteComprador, String metodoPagamento, String numeroCartao){
         double valorTotal = 0d;
         double valorFreteEspecial;
 
@@ -62,14 +60,14 @@ public class Compra {
                 x = x * 0.90;
             }
 
-            valorFreteEspecial = valorFrete(clienteComprador.getEndereco(), clienteComprador.isCapital()) * 0.70;
+            valorFreteEspecial = valorFreteProduto(clienteComprador);
             valorTotal = (x + valorFreteEspecial) * 0.90;
 
         }else {
             for (Produto value : produto) {
                 x += value.valorVenda;
             }
-            valorFreteEspecial = valorFrete(clienteComprador.getEndereco(), clienteComprador.isCapital());
+            valorFreteEspecial = valorFreteProduto(clienteComprador);
             valorTotal = x + valorFreteEspecial;
         }
 
@@ -126,6 +124,8 @@ public class Compra {
             valorFreteDescontado =  valorFrete * 0.70;
         }else if(clienteComprador.getTipo() == Cliente.Tipo.PRIME) {
             valorFreteDescontado = 0d;
+        }else{
+            valorFreteDescontado = valorFrete(clienteComprador.getEndereco(), clienteComprador.isCapital());
         }
         return valorFreteDescontado;
     }
