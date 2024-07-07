@@ -6,6 +6,9 @@ Recomendamos esse para que a visualização dos testes assim como o código seja
 
 [Link para proposta do trabalho](https://github.com/andrelanna/fga0242/tree/master/TP)
 
+Para abrir os projetos, como faço?
+Clone o repositório e depois abra na pasta tppe-varejo, nessa pasta você terá acesso ao projeto por completo.
+
 Onde está o arquivo para rodar todos os testes?
 Está no arquivo [AllTest.java](https://github.com/pedrohelias/tppe_tp1_varejo/blob/main/tppe-varejo/src/AllTests.java) :) !
 
