@@ -18,14 +18,16 @@ public class Cliente {
         Centro_Oeste,
     }
 
-    private final String nome;
-    private final String cpf;
-    private final Regiao endereco;
-    private final boolean capital;
-    private final Tipo tipo;
-    private final double cashback;
-    private final double mensalidade;
-    protected final ArrayList<Cartao> cartoes;
+    private  String nome;
+    private  String cpf;
+    private  Regiao endereco;
+    private  boolean capital;
+    private  Tipo tipo;
+    private  double cashback;
+    private  double mensalidade;
+    protected  ArrayList<Cartao> cartoes;
+    protected double gasto;
+    protected int mesGasto;
 
     // Construtor
     public Cliente(String nome, String cpf, Regiao endereco, boolean capital, Tipo tipo, double cashback, double mensalidade) {
@@ -37,6 +39,12 @@ public class Cliente {
         this.cashback = cashback;
         this.mensalidade = mensalidade;
         this.cartoes = new ArrayList<>();
+    }
+
+    public Cliente(String cpf, double gasto, int mesGasto) {
+        this.cpf = cpf;
+        this.gasto = gasto;
+        this.mesGasto = mesGasto;
     }
 
     // Métodos de cliente

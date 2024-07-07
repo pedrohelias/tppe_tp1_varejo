@@ -110,7 +110,7 @@ public class CompraCashbackTest {
     @Test
     public void testElegivelCashback() {
         compra = new Compra(data, cliente,produtoVendido,metodoPagamento,impostoGeral);
-        assertEquals(Compra.proverCashback(compra.metodoPagamento, compra.produtoVendido,cartao.getNumero(), compra.cliente.getTipo()),valorEsperado, 0.2);
+        assertEquals(valorEsperado,Compra.proverCashback(compra.metodoPagamento, compra.produtoVendido,cartao.getNumero(), compra.cliente.getTipo()), 0.2);
     }
 
 }

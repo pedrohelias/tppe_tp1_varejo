@@ -1,6 +1,7 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Compra {
 
@@ -90,8 +91,8 @@ public class Compra {
 
         double x = 0d;
         if(clienteComprador.getTipo() == Cliente.Tipo.ESPECIAL){
-            for (Produto value : produto) {
-                x += value.valorVenda;
+            for (Produto valor : produto) {
+                x += valor.valorVenda;
             }
 
             String numeroCartaoEmpresa = "429613";
@@ -107,8 +108,8 @@ public class Compra {
             valorTotal = (x + valorFreteEspecial) * 0.90;
 
         }else {
-            for (Produto value : produto) {
-                x += value.valorVenda;
+            for (Produto valor : produto) {
+                x += valor.valorVenda;
             }
 
             Imposto imp = new Imposto(clienteComprador.getEndereco().toString(),x);
@@ -184,23 +185,29 @@ public class Compra {
         return valorFreteDescontado;
     }
 
-//    public static int clienteElegivelParaEspecial( Int cpf, ArrayList<Compra> compra, int mes){
-//            ArrayList<Clientes> clienteElegivel;
-//
-//            List<Compra> compraFiltrada = compra.data.stream()
-//                    .filter(e -> e.getData().getMonthValue() == mes)
-//                    .collect(Collectors.toList());
-//
-//            int comprasRealizadasMensais = compraFiltrada.size();
-//            for(Object x: compraFiltrada.toArray()){
-//                // TODO faz um hashmap no qual o cpf é a key e o valor guardado é o quanto foi gastado, atualizando o valor gasto dentro desse hashmap toda vez que esse valor for encontrado
-//
-//            }
-//
-//            // TODO: Após isso selecionar quais clientes são elegiveis e guardar na variavel acima.
-//
-//            comprasRealizadasMensais = comprasRealizadasMensais - 1;
-//        return 0;
-//    }
+    public static List<Cliente> clienteElegivelParaEspecial( List<Compra> listaCompra, int mesAlvo) throws ParseException {
+        List<Cliente> listaClienteElegiveis = new ArrayList<>();
+        SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
+
+            for(Compra x: listaCompra){
+                Date dataCompleta = formatoData.parse(x.data);
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(dataCompleta);
+                int mes = calendar.get(Calendar.MONTH) + 1;
+
+                if(Objects.equals(mes,mesAlvo)){
+                    double valorComprado = 0d;
+                    for (Produto valor : x.produtoVendido) {
+                        valorComprado += valor.valorVenda;
+                    }
+
+                    if (valorComprado > 100d){
+                        listaClienteElegiveis.add(new Cliente(x.cliente.getCpf(), valorComprado, mes));
+                    }
+                }
+            }
+
+        return listaClienteElegiveis;
+    }
 
 }

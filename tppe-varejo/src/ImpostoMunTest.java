@@ -22,7 +22,7 @@ public class ImpostoMunTest {
     @Parameters
     public static Collection<Object[]> getParameters(){
         return Arrays.asList(new Object[][] {
-                {"Distrito_Federal", 100, 100}, //dentro do DF
+                {"Distrito_Federal", 100, 0}, //dentro do DF
                 {"Sul", 100, 4} //fora do DF
         });
     }

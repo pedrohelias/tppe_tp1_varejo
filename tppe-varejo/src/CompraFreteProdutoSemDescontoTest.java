@@ -145,6 +145,6 @@ public class CompraFreteProdutoSemDescontoTest {
     @Test
     public void testCalculoFreteproduto(){
         double valorComprado = Compra.valorFrete(cliente.getEndereco(), cliente.isCapital());
-        assertEquals(valorComprado,valorEsperado,0.1);
+        assertEquals(valorEsperado,valorComprado,0.1);
     }
 }

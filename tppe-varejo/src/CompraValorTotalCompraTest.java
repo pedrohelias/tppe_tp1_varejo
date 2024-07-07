@@ -150,7 +150,7 @@ public class CompraValorTotalCompraTest {
     @Test
     public void testCalculoDoValorDaCompraTotal(){
         compra = new Compra(data, cliente, produtoVendido, metodoPagamento, impostoGeral);
-        assertEquals( Compra.valorTotalCompra(compra.produtoVendido, compra.cliente, compra.metodoPagamento, cartao.getNumero(), usarCashback), valorEsperado,0.1);
+        assertEquals( valorEsperado, Compra.valorTotalCompra(compra.produtoVendido, compra.cliente, compra.metodoPagamento, cartao.getNumero(), usarCashback),0.1);
     }
 
 }

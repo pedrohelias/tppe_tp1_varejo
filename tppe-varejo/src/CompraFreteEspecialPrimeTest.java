@@ -156,7 +156,7 @@ public class CompraFreteEspecialPrimeTest {
     @Test
     public void testCalculoFreteClienteEspecial(){
         double valorComprado = Compra.valorFreteProduto(cliente);
-        assertEquals(valorComprado,valorEsperado,0.1);
+        assertEquals(valorEsperado,valorComprado,0.1);
     }
 
 }
