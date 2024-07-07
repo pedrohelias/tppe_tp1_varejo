@@ -28,7 +28,8 @@ public class Imposto {
         double calculo;
 
         if(regiao == "Distrito_Federal"){
-            setImpostoMun(valorCompra);
+            calculo = valorCompra * 0;
+            setImpostoMun(calculo);
             return impostoMun;
         }else{
             calculo = valorCompra * 0.04;

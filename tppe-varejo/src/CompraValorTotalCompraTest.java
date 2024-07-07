@@ -14,6 +14,7 @@ public class CompraValorTotalCompraTest {
     protected List<Produto> produtoVendido;
     protected String metodoPagamento;
     protected Imposto impostoGeral;
+    protected Boolean usarCashback;
     protected double valorEsperado;
 
     @Parameterized.Parameters
@@ -43,8 +44,43 @@ public class CompraValorTotalCompraTest {
                         cartaoUsuario1,
                         produtos,
                         "CARTAO",
-                        new Imposto("Distrito_Federal", 100),
-                        262.39d
+                        new Imposto(Cliente.Regiao.Sudeste.toString(), 262.39d),
+                        true,
+                        304.37d
+                },
+                {
+                        "14/10/2024 15:33:00",
+                        new Cliente("Caio Cardoso",
+                                "567.541.880-65",
+                                Cliente.Regiao.Distrito_Federal,
+                                true,
+                                Cliente.Tipo.PRIME,
+                                262.39d,
+                                0.0
+                        ),
+                        cartaoUsuario1,
+                        produtos,
+                        "CARTAO",
+                        new Imposto(Cliente.Regiao.Distrito_Federal.toString(), 262.39d),
+                        true,
+                        47.23d
+                },
+                {
+                        "14/10/2024 15:33:00",
+                        new Cliente("Caio Cardoso",
+                                "567.541.880-65",
+                                Cliente.Regiao.Sudeste,
+                                true,
+                                Cliente.Tipo.PRIME,
+                                100.0,
+                                0.0
+                        ),
+                        cartaoUsuario1,
+                        produtos,
+                        "CARTAO",
+                        new Imposto(Cliente.Regiao.Sudeste.toString(), 262.39d),
+                        false,
+                        304.37d
                 },
                 {
                         "14/10/2024 15:33:00",
@@ -59,8 +95,9 @@ public class CompraValorTotalCompraTest {
                         cartaoUsuario2,
                         produtos,
                         "CARTAO",
-                        new Imposto("Distrito_Federal", 100),
-                        218.83d
+                        new Imposto(Cliente.Regiao.Centro_Oeste.toString(), 236.15d),
+                        false,
+                        252.84d
                 },
                 {
                         "14/10/2024 15:33:00",
@@ -75,8 +112,9 @@ public class CompraValorTotalCompraTest {
                         cartaoUsuario1,
                         produtos,
                         "DINHEIRO",
-                        new Imposto("Distrito_Federal", 100),
-                        251.90d
+                        new Imposto(Cliente.Regiao.Norte.toString(), 262.39d),
+                        false,
+                        289.68d
                 },
                 {
                         "14/10/2024 15:33:00",
@@ -91,26 +129,28 @@ public class CompraValorTotalCompraTest {
                         cartaoUsuario2,
                         produtos,
                         "DINHEIRO",
-                        new Imposto("Distrito_Federal", 100),
-                        277.39d
+                        new Imposto(Cliente.Regiao.Nordeste.toString(), 262.39d),
+                        false,
+                        319.37d
                 }
         });
     }
 
-    public CompraValorTotalCompraTest(String data, Cliente cliente, Cartao cartao, List<Produto> produtoVendido, String metodoPagamento, Imposto impostoGeral, double valorEsperado) {
+    public CompraValorTotalCompraTest(String data, Cliente cliente, Cartao cartao, List<Produto> produtoVendido, String metodoPagamento, Imposto impostoGeral, Boolean usarCashback, double valorEsperado) {
         this.data = data;
         this.cliente = cliente;
         this.cartao = cartao;
         this.produtoVendido = produtoVendido;
         this.metodoPagamento = metodoPagamento;
         this.impostoGeral = impostoGeral;
+        this.usarCashback = usarCashback;
         this.valorEsperado = valorEsperado;
     }
 
     @Test
     public void testCalculoDoValorDaCompraTotal(){
         compra = new Compra(data, cliente, produtoVendido, metodoPagamento, impostoGeral);
-        assertEquals( Compra.valorTotalCompra(compra.produtoVendido, compra.cliente, compra.metodoPagamento, cartao.getNumero()), valorEsperado,0.1);
+        assertEquals( Compra.valorTotalCompra(compra.produtoVendido, compra.cliente, compra.metodoPagamento, cartao.getNumero(), usarCashback), valorEsperado,0.1);
     }
 
 }

@@ -10,6 +10,46 @@ public class Compra {
     protected String metodoPagamento;
     protected Imposto impostoGeral;
 
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public List<Produto> getProdutoVendido() {
+        return produtoVendido;
+    }
+
+    public void setProdutoVendido(List<Produto> produtoVendido) {
+        this.produtoVendido = produtoVendido;
+    }
+
+    public String getMetodoPagamento() {
+        return metodoPagamento;
+    }
+
+    public void setMetodoPagamento(String metodoPagamento) {
+        this.metodoPagamento = metodoPagamento;
+    }
+
+    public Imposto getImpostoGeral() {
+        return impostoGeral;
+    }
+
+    public void setImpostoGeral(Imposto impostoGeral) {
+        this.impostoGeral = impostoGeral;
+    }
+
     public Compra(String data, Cliente cliente, List<Produto> produtoVendido, String metodoPagamento, Imposto impostoGeral) {
         this.data = data;
         this.cliente = cliente;
@@ -44,7 +84,7 @@ public class Compra {
         return valorCashback;
     }
 
-    public static  double valorTotalCompra(List<Produto> produto, Cliente clienteComprador, String metodoPagamento, String numeroCartao){
+    public static  double valorTotalCompra(List<Produto> produto, Cliente clienteComprador, String metodoPagamento, String numeroCartao,  Boolean usarCashback){
         double valorTotal = 0d;
         double valorFreteEspecial;
 
@@ -56,9 +96,12 @@ public class Compra {
 
             String numeroCartaoEmpresa = "429613";
             String cartaoReduzido = numeroCartao.substring(0,6);
-            if(cartaoReduzido.equals(numeroCartaoEmpresa)){
+            if(cartaoReduzido.equals(numeroCartaoEmpresa) && Objects.equals(metodoPagamento, "CARTAO")){
                 x = x * 0.90;
             }
+
+            Imposto imp = new Imposto(clienteComprador.getEndereco().toString(),x);
+            x = x + imp.ICMS(imp.regiao, x)+ imp.ImpMunicipal(imp.regiao,x);
 
             valorFreteEspecial = valorFreteProduto(clienteComprador);
             valorTotal = (x + valorFreteEspecial) * 0.90;
@@ -67,8 +110,19 @@ public class Compra {
             for (Produto value : produto) {
                 x += value.valorVenda;
             }
+
+            Imposto imp = new Imposto(clienteComprador.getEndereco().toString(),x);
+            x = x + imp.ICMS(imp.regiao, x)+ imp.ImpMunicipal(imp.regiao,x);
+
             valorFreteEspecial = valorFreteProduto(clienteComprador);
             valorTotal = x + valorFreteEspecial;
+
+            if(clienteComprador.getTipo() == Cliente.Tipo.PRIME){
+                if (Objects.equals(usarCashback, true)){
+                    double saldoCashback = clienteComprador.getCashback();
+                    valorTotal = valorTotal - saldoCashback;
+                }
+            }
         }
 
         return valorTotal;
