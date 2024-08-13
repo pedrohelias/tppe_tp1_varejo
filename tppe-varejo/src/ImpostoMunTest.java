@@ -1,5 +1,3 @@
-
-
 import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
@@ -10,7 +8,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-
 @RunWith(Parameterized.class)
 public class ImpostoMunTest {
 
@@ -20,24 +17,23 @@ public class ImpostoMunTest {
     private double valorEsperado;
 
     @Parameters
-    public static Collection<Object[]> getParameters(){
+    public static Collection<Object[]> getParameters() {
         return Arrays.asList(new Object[][] {
-                {"Distrito_Federal", 100, 0}, //dentro do DF
-                {"Sul", 100, 4} //fora do DF
+            {"Distrito_Federal", 100, 0}, // dentro do DF, 100 * 0 = 0
+            {"Sul", 100, 4} // fora do DF, 100 * 0.04 = 4
         });
     }
 
-    public ImpostoMunTest(String regiao, double valorCompra, double valorEsperado){
+    public ImpostoMunTest(String regiao, double valorCompra, double valorEsperado) {
         this.regiao = regiao;
         this.valorCompra = valorCompra;
         this.valorEsperado = valorEsperado;
     }
 
-    @Test 
-    public void testMunicipal(){
-        imp = new Imposto(regiao, valorCompra);
+    @Test
+    public void testMunicipal() {
+        imp = new Imposto(regiao, valorCompra, 0, 0.04, 0.18, 0.12);
         assertEquals(valorEsperado, imp.ImpMunicipal(regiao, valorCompra), 0.1);
-
     }
 }
 
