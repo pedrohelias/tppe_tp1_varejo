@@ -84,7 +84,7 @@ public class Imposto {
         double calculo;
 
         if(regiao == "Distrito_Federal"){
-            calculo = valorCompra + impostoMun.fatorCalcDF; //correção de calculo
+            calculo = valorCompra * impostoMun.fatorCalcDF; //correção de calculo
             impostoMun.setValor(calculo);
             return impostoMun.getValor();
         }else{
