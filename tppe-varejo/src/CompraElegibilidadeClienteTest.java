@@ -30,7 +30,7 @@ public class CompraElegibilidadeClienteTest {
                 new Produto("agcr1284", "descrição teste tdd1", 1, "g")
         );
 
-        Imposto imp1 = new Imposto(Cliente.Regiao.Sudeste.toString(), 262.39);
+        Imposto imp1 = new Imposto(Cliente.Regiao.Sudeste.toString(), 262.39,0, 0.04, 0.18, 0.12);
 
         Cliente cliente1 = new Cliente("João da Cunha", "039.992.690-90", Cliente.Regiao.Norte, true, Cliente.Tipo.ESPECIAL, 0.0, 0.0);
         Cliente cliente2 = new Cliente("Caio Cardoso", "567.541.880-65", Cliente.Regiao.Sudeste, false, Cliente.Tipo.ESPECIAL, 0.0, 0.0);
@@ -75,12 +75,12 @@ public class CompraElegibilidadeClienteTest {
         return Arrays.asList(new Object[][] {
                 {
                     listaDummyCompra1,
-                    mesAtual.getValue(),
+                    7,
                     listaDummyCliente1
                 },
                 {
                     listaDummyCompra2,
-                    mesAtual.getValue(),
+                    7,
                     listaDummyCliente2
                 },
                 {

@@ -1,5 +1,9 @@
 public class Imposto {
 
+    // Temporário
+//    public Imposto(String string, double x) {
+//    }
+
     //classe imposto municipal 
 
     class impostoMun {

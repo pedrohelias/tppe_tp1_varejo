@@ -44,7 +44,7 @@ public class CompraValorTotalCompraTest {
                         cartaoUsuario1,
                         produtos,
                         "CARTAO",
-                        new Imposto(Cliente.Regiao.Sudeste.toString(), 262.39d),
+                        new Imposto(Cliente.Regiao.Sudeste.toString(), 262.39d,0, 0.04, 0.18, 0.12),
                         true,
                         304.37d
                 },
@@ -61,7 +61,7 @@ public class CompraValorTotalCompraTest {
                         cartaoUsuario1,
                         produtos,
                         "CARTAO",
-                        new Imposto(Cliente.Regiao.Distrito_Federal.toString(), 262.39d),
+                        new Imposto(Cliente.Regiao.Distrito_Federal.toString(), 262.39d,0, 0.04, 0.18, 0.12),
                         true,
                         47.23d
                 },
@@ -78,7 +78,7 @@ public class CompraValorTotalCompraTest {
                         cartaoUsuario1,
                         produtos,
                         "CARTAO",
-                        new Imposto(Cliente.Regiao.Sudeste.toString(), 262.39d),
+                        new Imposto(Cliente.Regiao.Sudeste.toString(), 262.39d,0, 0.04, 0.18, 0.12),
                         false,
                         304.37d
                 },
@@ -95,7 +95,7 @@ public class CompraValorTotalCompraTest {
                         cartaoUsuario2,
                         produtos,
                         "CARTAO",
-                        new Imposto(Cliente.Regiao.Centro_Oeste.toString(), 236.15d),
+                        new Imposto(Cliente.Regiao.Centro_Oeste.toString(), 236.15d,0, 0.04, 0.18, 0.12),
                         false,
                         252.84d
                 },
@@ -112,7 +112,7 @@ public class CompraValorTotalCompraTest {
                         cartaoUsuario1,
                         produtos,
                         "DINHEIRO",
-                        new Imposto(Cliente.Regiao.Norte.toString(), 262.39d),
+                        new Imposto(Cliente.Regiao.Norte.toString(), 262.39d,0, 0.04, 0.18, 0.12),
                         false,
                         289.68d
                 },
@@ -129,7 +129,7 @@ public class CompraValorTotalCompraTest {
                         cartaoUsuario2,
                         produtos,
                         "DINHEIRO",
-                        new Imposto(Cliente.Regiao.Nordeste.toString(), 262.39d),
+                        new Imposto(Cliente.Regiao.Nordeste.toString(), 262.39d,0, 0.04, 0.18, 0.12),
                         false,
                         319.37d
                 }
