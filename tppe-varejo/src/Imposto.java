@@ -1,62 +1,124 @@
 public class Imposto {
 
-    public String regiao;
-    public double valorCompra;
-    public double impostoMun;
-    public double impostoIcms;
+    //classe imposto municipal 
+
+    class impostoMun {
+        public double valor;
+        public double fatorCalcDF; //fator de calculo se tiver no DF
+        public double fatorCalcNac; //fator de calculo se tiver fora do DF
+
+        public impostoMun(double fatorCalcDF, double fatorCalcNac) {
+            this.fatorCalcDF = fatorCalcDF;
+            this.fatorCalcNac = fatorCalcNac;
+        }
+
+        void setValor(double valor){
+            this.valor = valor;
+        }
     
-    public Imposto(String regiao, double valorCompra) {
-        //TODO Auto-generated constructor stub
-        this.regiao = regiao;
-        this.valorCompra = valorCompra;
+        double getValor(){
+            return valor;
+        }
+
+
     }
 
+    //classe imposto ICMS
+
+    class impostoIcms {
+        public double valor;
+        public double fatorCalcDF; //fator de calculo se tiver no DF
+        public double fatorCalcNac; //fator de calculo se tiver fora do DF
+
+        public impostoIcms(double fatorCalcDF, double fatorCalcNac) {
+            this.fatorCalcDF = fatorCalcDF;
+            this.fatorCalcNac = fatorCalcNac;
+        }
+
+
+        void setValor(double valor){
+            this.valor = valor;
+        }
+    
+        double getValor(){
+            return valor;
+        }
+    }
+
+
+    //aqui começa as variaveis da classe imposto 
+
+
+    public String regiao;
+    public double valorCompra;
+    public impostoMun impostoMun;
+    public impostoIcms impostoIcms;
+
+
+    //construtor da classe
+    
+    public Imposto(String regiao, double valorCompra, double fatorCalcDFMun, double fatorCalcNacMun, double fatorCalcDFIcms, double fatorCalcNacIcms ) {
+        this.regiao = regiao;
+        this.valorCompra = valorCompra;
+        this.impostoMun = new impostoMun(fatorCalcDFMun, fatorCalcNacMun);
+        this.impostoIcms = new impostoIcms(fatorCalcDFIcms, fatorCalcNacIcms);
+    }
+    
+    //vai definir icms
     public double ICMS(String regiao, double valorCompra){
         double calculo;
         if(regiao == "Distrito_Federal"){
-            calculo = valorCompra * 0.18;
-            setImpostoIcms(calculo);
-            return impostoIcms;
+            calculo = valorCompra * impostoIcms.fatorCalcDF;
+            impostoIcms.setValor(calculo);
+            return impostoIcms.getValor();
         }else{
-            calculo = valorCompra * 0.12;
-            setImpostoIcms(calculo);
-            return impostoIcms; 
+            calculo = valorCompra * impostoIcms.fatorCalcNac;
+            impostoIcms.setValor(calculo);
+            return impostoIcms.getValor();
         }
     }
+
+    //vai definir impMunicipal
 
     public double ImpMunicipal(String regiao, double valorCompra){
         double calculo;
 
         if(regiao == "Distrito_Federal"){
-            calculo = valorCompra * 0;
-            setImpostoMun(calculo);
-            return impostoMun;
+            calculo = valorCompra * impostoMun.fatorCalcDF; //correção de calculo
+            impostoMun.setValor(calculo);
+            return impostoMun.getValor();
         }else{
-            calculo = valorCompra * 0.04;
-            setImpostoMun(calculo);
-            return impostoMun; 
+            calculo = valorCompra * impostoMun.fatorCalcNac;
+            impostoMun.setValor(calculo);
+            return impostoMun.getValor(); 
         }
     }
 
-    public double valorTotalImpostos(){
-        double total = getImpostoIcms() + getImpostoMun();
+    //vai totalizar os impostos
+
+    public double valorTotalImpostos(String regiao, double valorCompra){
+        double valorICMS = ICMS(regiao, valorCompra);
+        double impMun = ImpMunicipal(regiao, valorCompra);
+        double total = valorICMS + impMun;
         return total;
     }
 
-    double getImpostoMun(){
-        return impostoMun;
+    String getRegiao(){
+        return regiao;
     }
 
-    void setImpostoMun(double impostoMun){
-        this.impostoMun = impostoMun;
+    void setRegiao(String regiao){
+        this.regiao = regiao;
     }
 
-    double getImpostoIcms(){
-        return impostoIcms;
+    double getValorCompra(){
+        return valorCompra;
     }
 
-    void setImpostoIcms(double impostoIcms){
-        this.impostoIcms = impostoIcms;
+    void setValorCompra(double valorCompra){
+        this.valorCompra = valorCompra;
     }
+
+
 
 }
