@@ -77,44 +77,11 @@ public class Compra {
         return valorCashback;
     }
 
-    public static  double valorTotalCompra(List<Produto> produto, Cliente clienteComprador, String metodoPagamento, String numeroCartao,  Boolean usarCashback){
-        double valorTotal = 0d;
-        double valorFreteEspecial;
-        double valorComprado = calculaSubTotalCompra(produto);
-
-        if(clienteComprador.getTipo() == Cliente.Tipo.ESPECIAL){
-
-            String numeroCartaoEmpresa = "429613";
-            String cartaoReduzido = numeroCartao.substring(0,6);
-            if(cartaoReduzido.equals(numeroCartaoEmpresa) && Objects.equals(metodoPagamento, "CARTAO")){
-                valorComprado = valorComprado * 0.90;
-            }
-
-            Imposto imp = new Imposto(clienteComprador.getEndereco().toString(),valorComprado,0, 0.04, 0.18, 0.12);
-            valorComprado = valorComprado + imp.ICMS(imp.regiao, valorComprado)+ imp.ImpMunicipal(imp.regiao,valorComprado);
-
-            valorFreteEspecial = valorFreteProduto(clienteComprador);
-            valorTotal = (valorComprado + valorFreteEspecial) * 0.90;
-
-        }else {
-
-            Imposto imp = new Imposto(clienteComprador.getEndereco().toString(),valorComprado,0, 0.04, 0.18, 0.12);
-            valorComprado = valorComprado + imp.ICMS(imp.regiao, valorComprado)+ imp.ImpMunicipal(imp.regiao,valorComprado);
-
-            valorFreteEspecial = valorFreteProduto(clienteComprador);
-            valorTotal = valorComprado + valorFreteEspecial;
-
-            if(clienteComprador.getTipo() == Cliente.Tipo.PRIME){
-                if (Objects.equals(usarCashback, true)){
-                    double saldoCashback = clienteComprador.getCashback();
-                    valorTotal = valorTotal - saldoCashback;
-                }
-            }
-        }
-
-        return valorTotal;
+    public static double valorTotalCompra(List<Produto> produtos, Cliente clienteComprador, String metodoPagamento, String numeroCartao, Boolean usarCashback) {
+        ValorTotalCompra calculadora = new ValorTotalCompra(produtos, clienteComprador, metodoPagamento, numeroCartao, usarCashback);
+        return calculadora.calcularTotalCompra();
     }
-    
+
     public static double valorFrete(Cliente.Regiao regiao, boolean localidade){
         double valorFreteEsperado = 0d;
 
@@ -156,19 +123,6 @@ public class Compra {
             }
         }
         return valorFreteEsperado;
-    }
-    
-    public static double valorFreteProduto(Cliente clienteComprador){
-        double valorFreteDescontado = -1d;
-        if(clienteComprador.getTipo() == Cliente.Tipo.ESPECIAL){
-            double valorFrete = valorFrete(clienteComprador.getEndereco(), clienteComprador.isCapital());
-            valorFreteDescontado =  valorFrete * 0.70;
-        }else if(clienteComprador.getTipo() == Cliente.Tipo.PRIME) {
-            valorFreteDescontado = 0d;
-        }else{
-            valorFreteDescontado = valorFrete(clienteComprador.getEndereco(), clienteComprador.isCapital());
-        }
-        return valorFreteDescontado;
     }
 
     public static List<Cliente> clienteElegivelParaEspecial( List<Compra> listaCompra, int mesAlvo) throws ParseException {
