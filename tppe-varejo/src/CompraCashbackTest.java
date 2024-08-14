@@ -43,7 +43,7 @@ public class CompraCashbackTest {
                     cartaoUsuario1,
                     produtos,
                     "CARTAO",
-                    new Imposto("Distrito_Federal", 100),
+                    new Imposto("Distrito_Federal", 100,0, 0.04, 0.18, 0.12),
                     7.84
                 },
                 {
@@ -59,7 +59,7 @@ public class CompraCashbackTest {
                         cartaoUsuario2,
                         produtos,
                         "CARTAO",
-                        new Imposto("Distrito_Federal", 100),
+                        new Imposto("Distrito_Federal", 100,0, 0.04, 0.18, 0.12),
                         13.06
                 },
                 {
@@ -75,7 +75,7 @@ public class CompraCashbackTest {
                         cartaoUsuario2,
                         produtos,
                         "DINHEIRO",
-                        new Imposto("Distrito_Federal", 100),
+                        new Imposto("Distrito_Federal", 100,0, 0.04, 0.18, 0.12),
                         7.84
                 },
                 {
@@ -91,7 +91,7 @@ public class CompraCashbackTest {
                         cartaoUsuario2,
                         produtos,
                         "DINHEIRO",
-                        new Imposto("Distrito_Federal", 100),
+                        new Imposto("Distrito_Federal", 100,0, 0.04, 0.18, 0.12),
                         0
                 }
         });
