@@ -19,7 +19,7 @@ public class ValorTotalCompra {
     public double calcularTotalCompra() {
         double valorTotal = 0d;
         double valorFreteEspecial;
-        double valorComprado = calculaSubTotalCompra(produtos);
+        double valorComprado = Compra.calculaSubTotalCompra(produtos);
 
         if (clienteComprador.getTipo() == Cliente.Tipo.ESPECIAL) {
             valorComprado = comparaCartaoEmpresa(metodoPagamento, numeroCartao, valorComprado);
@@ -58,14 +58,6 @@ public class ValorTotalCompra {
         String cartaoReduzido = numeroCartao.substring(0,6);
         if(cartaoReduzido.equals(numeroCartaoEmpresa) && Objects.equals(metodoPagamento, "CARTAO")){
             valorComprado = valorComprado * 0.90;
-        }
-        return valorComprado;
-    }
-
-    private double calculaSubTotalCompra(List<Produto> listaPedidos) {
-        double valorComprado = 0.0d;
-        for (Produto valor : listaPedidos) {
-            valorComprado += valor.valorVenda;
         }
         return valorComprado;
     }

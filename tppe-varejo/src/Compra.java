@@ -158,7 +158,7 @@ public class Compra {
         return new SimpleDateFormat("dd/MM/yyyy");
     }
 
-    private static double calculaSubTotalCompra(List<Produto> listaPedidos) {
+    protected static double calculaSubTotalCompra(List<Produto> listaPedidos) {
         double valorComprado = 0.0d;
         for (Produto valor : listaPedidos) {
             valorComprado += valor.valorVenda;
